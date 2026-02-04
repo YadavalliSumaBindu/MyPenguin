@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Valentine Special 💖🐧</title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at 20% 20%, #ff9a9e, #fad0c4 50%, #ffd1ff);
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px 60px 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+            width: 450px;
+        }
+
+        h1 {
+            color: #e63946;
+            margin-bottom: 15px;
+        }
+
+        #sadText {
+            height: 24px;
+            margin-bottom: 25px;
+            color: #6c757d;
+            font-size: 16px;
+            font-style: italic;
+        }
+
+        .buttons {
+            position: relative;
+            height: 120px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #e63946;
+            color: white;
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+        }
+
+        #yesBtn:hover {
+            background-color: #d62839;
+            transform: translateY(-2px);
+        }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: #333;
+            position: absolute;
+            left: 180px;
+            top: 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Shaking effect */
+        .shake {
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #e63946;
+            opacity: 0.9;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); }
+            100% { transform: translateY(700px) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Will you be my lifetime Valentine? 💕🐧</h1>
+
+    <div id="sadText"></div>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="yesClicked()">Yes 💖🐧</button>
+        <button id="noBtn" onmouseover="moveNoButton()">No 💔🐧</button>
+    </div>
+</div>
+
+<script>
+    const sadMessages = [
+        "Oh no... my heart is cracking 💔🐧",
+        "Why would you do this to me? 😢🐧",
+        "I even picked flowers for you 🌹🐧",
+        "Guess I’ll be alone this Valentine 😭🐧",
+        "That hurts more than you know 💔🐧",
+        "I believed in us... 😞🐧",
+        "Love is running away... just like you 💔🐧",
+        "Please don't leave me in the cold ❄️🐧",
+        "I promise I’m not clingy… just lonely 😢🐧",
+        "My heart is doing the sad emoji dance 😭🐧"
+    ];
+
+    function moveNoButton() {
+        const noBtn = document.getElementById("noBtn");
+        const container = document.querySelector(".container");
+        const sadText = document.getElementById("sadText");
+
+        const maxX = container.clientWidth - noBtn.offsetWidth;
+        const maxY = 100;
+
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+
+        noBtn.style.left = randomX + "px";
+        noBtn.style.top = randomY + "px";
+
+        // shake effect
+        noBtn.classList.add("shake");
+        setTimeout(() => noBtn.classList.remove("shake"), 300);
+
+        const randomMessage =
+            sadMessages[Math.floor(Math.random() * sadMessages.length)];
+        sadText.textContent = randomMessage;
+    }
+
+    function yesClicked() {
+        document.querySelector(".container").innerHTML = `
+            <h1>Yay!!! 💖🥰🐧</h1>
+            <p style="font-size:18px; color:#e63946;">
+		haha good, you saved man 🥰🐧<br>
+                Best decision ever 💕🐧<br>
+                <h2> Happy Valentine’s Day! 🌹🐧</h2><br>
+                Love u bava 💖🥰🐧
+            </p>
+        `;
+
+        // confetti
+        for (let i = 0; i < 60; i++) {
+            const confetti = document.createElement("div");
+            confetti.classList.add("confetti");
+            confetti.style.left = Math.random() * window.innerWidth + "px";
+            confetti.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
+            document.body.appendChild(confetti);
+        }
+    }
+</script>
+
+</body>
+</html>
